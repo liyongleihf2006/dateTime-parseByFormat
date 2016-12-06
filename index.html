@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script src="dateTime-parseByFormat.js"></script>
+    <script>
+        var date=Date.parseByFormat("2016-01-02 08:07:02","yyyy-MM-dd hh:mm:ss");
+        console.log(date.toLocaleString("cmn-Hans-CN",{
+            year:"numeric", month:"2-digit", day:"2-digit", hour:"numeric", minute:"numeric", second:"numeric",hour12:false
+        }));
+        var date2=Date.parseByFormat("2016-01-02T08:07:02.158+08:00","yyyy-MM-dd hh:mm:ss");
+        console.log(date2.toLocaleString("cmn-Hans-CN",{
+            year:"numeric", month:"2-digit", day:"2-digit", hour:"numeric", minute:"numeric", second:"numeric",hour12:false
+        }));
+        /*
+        * 下面这个解析是错误的
+        * 2016-01-02T08:07:02.158Z的北京时间是 2016年1月2号16时7分2秒，
+        * 而下面解析出来的日期却是 2016年1月2号8时7分2秒
+        * */
+        var date3=Date.parseByFormat("2016-01-02T08:07:02.200Z","yyyy-MM-dd hh:mm:ss");
+        console.log(date3.toLocaleString("cmn-Hans-CN",{
+            year:"numeric", month:"2-digit", day:"2-digit", hour:"numeric", minute:"numeric", second:"numeric",hour12:false
+        }));
+        console.log(new Date().toISOString());
+        console.log(new Date("2016-12-06T06:56:45.860Z"));
+        console.log(new Date("2016-12-06T06:56:45.860"));
+    </script>
+
+</body>
+</html>
